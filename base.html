@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión + Pausas Activas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body, html {
+            margin: 0; 
+            padding: 0; 
+            height: 100%; 
+            width: 100%;
+            font-family: 'Lato', sans-serif;
+            overflow: hidden;
+            background-color: #000;
+        }
+        #main-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; 
+            height: 100%; 
+            border: none;
+            z-index: 1;
+            display: block;
+        }
+        
+        /* --- Overlay de Inicio (Botón de Sonido) --- */
+        #init-overlay {
+            position: fixed;
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none; 
+            justify-content: center;
+            align-items: center;
+            z-index: 10000; 
+            flex-direction: column;
+            color: white;
+            font-size: 2em;
+            text-align: center;
+        }
+        #start-button {
+            padding: 20px 40px;
+            font-size: 1.5em;
+            cursor: pointer;
+            background-color: #28a745; 
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        /* --- Overlay de Contenido (Vídeos/Cumpleaños) --- */
+        #overlay {
+            position: fixed;
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        #overlay-content { 
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative; 
+            flex-direction: column;
+        }
+        #dynamic-content {
+            display: none;
+            width: 100%; 
+            height: 100%; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            position: relative; 
+        }
+
+        /* --- ESTILOS PARA LA IMAGEN DE FONDO DE CUMPLEAÑOS --- */
+        .birthday-background-image {
+            position: absolute; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            object-position: center;
+        }
+        
+        /* --- ESTILOS PARA EL TEXTO DEL NOMBRE DE CUMPLEAÑOS (GRANDE Y RESALTADO) --- */
+        #birthday-text {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(20px);
+
+    font-size: 6.5em;
+    font-weight: 900;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    z-index: 10001;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    display: none;
+
+    /* --- DEGRADADO DENTRO DE LAS LETRAS --- */
+    background: linear-gradient(45deg, #FFD700, #FFA500, #FFC300);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* --- SOMBRA MUY SUAVE SOLO PARA CONTRASTE --- */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    }
+    </style>
+</head>
+<body>
+    
+    <div id="init-overlay">
+        <p>Haga clic para iniciar la reproducción con sonido.</p>
+        <button id="start-button" onclick="handleStartSound()">Iniciar con Sonido</button>
+    </div>
+
+    <iframe id="main-iframe" src="https://www.parbull.com/gestion_ordenes.html"></iframe>
+
+    <div id="overlay">
+        <div id="overlay-content">
+            <div id="dynamic-content"></div> 
+            <div id="birthday-text"></div> 
+            <button id="audio-button">Activar Sonido</button> 
+        </div>
+    </div>
+
+    <script src="/static/js/base.js"></script>
+</body>
+</html>
